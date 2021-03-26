@@ -40,10 +40,15 @@ public class MainController extends HttpServlet{
 				choice = "1";
 			}
 			*/
-			List<BookDto> list = dao.getBookList(1);
+			List<BookDto> list = dao.getBookList(2);
 			
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("main.jsp").forward(req, resp);
+			
+			// 활동순위 activity
+			
+			// 소그룹 순위
+			
 		}
 	}
 }

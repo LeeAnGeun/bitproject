@@ -23,21 +23,30 @@ public class BookDao {
 	
 	// 책 리스트 가져가기 위한 메소드
 	public List<BookDto> getBookList(int choice){
-		String sql = " SELECT BOOKNUM, BOOKTITLE, CATEGORIES, BOOKREADCOUNT, BOOKDEL, GRADE,"
-								+ " AUTHOR, ISSUEDATE, BOOKHEADER, PUBLISHER "
-					+ " FROM BOOK ";
 		
+		String sql = " SELECT BOOKNUM, BOOKTITLE, CATEGORIES, BOOKREADCOUNT, BOOKDEL, GRADE, "
+									+ " AUTHOR, ISSUEDATE, BOOKHEADER, PUBLISHER ";
 		// 이달의 추천
 		if(choice == 1) {
-			sql += " ORDER BY GRADE ";
+			sql = " SELECT BOOKNUM, BOOKTITLE, CATEGORIES, BOOKREADCOUNT, BOOKDEL, GRADE, "
+					+ " AUTHOR, ISSUEDATE, BOOKHEADER, PUBLISHER "
+					+ " FROM BOOK "
+					+ " ORDER BY GRADE ";
 		}
 		// 분야별 추천
 		else if(choice == 2) {
-			sql += " ORDER BY ( SELECT MAX(GRADE)" + 
-					" FROM BOOK " + 
-					" GROUP BY CATEGORIES )";
+			sql = " SELECT BOOKNUM, BOOKTITLE, CATEGORIES, BOOKREADCOUNT, BOOKDEL, GRADE, "		//RNUM추가
+					+ " AUTHOR, ISSUEDATE, BOOKHEADER, PUBLISHER, RNUM "
+					+ " FROM (SELECT ROW_NUMBER() OVER (PARTITION BY CATEGORIES ORDER BY GRADE DESC) AS RNUM, BOOKNUM, BOOKTITLE, CATEGORIES, BOOKREADCOUNT, BOOKDEL, GRADE, "
+								+ " AUTHOR, ISSUEDATE, BOOKHEADER, PUBLISHER " 
+							+ " FROM BOOK) "
+					+ "	WHERE RNUM = 1 ";
 		} 
-		System.out.println("sql = " + sql);
+		else {//일반 검색
+			
+			
+		}
+		System.out.println("sql = " + sql);		
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
