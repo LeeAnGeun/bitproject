@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import book.BookDao;
 import book.BookDto;
+import login.LoginDto;
 
 public class MainController extends HttpServlet{
 	
@@ -43,11 +44,22 @@ public class MainController extends HttpServlet{
 			List<BookDto> list = dao.getBookList(2);
 			
 			req.setAttribute("list", list);
-			req.getRequestDispatcher("main.jsp").forward(req, resp);
 			
 			// 활동순위 activity
 			
+			MainDao Mdao = MainDao.getInstance();
+			List<LoginDto> Mlist = Mdao.getActivityList();
+			
+			req.setAttribute("Mlist", Mlist);
+			
+			
+			
+			
 			// 소그룹 순위
+			
+			
+			
+			req.getRequestDispatcher("main.jsp").forward(req, resp);
 			
 		}
 	}

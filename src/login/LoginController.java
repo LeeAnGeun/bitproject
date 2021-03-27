@@ -21,7 +21,7 @@ public class LoginController extends HttpServlet{
 	
 	public void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.setCharacterEncoding("utf-8");
-		System.out.println("BbsController doProcess");
+		System.out.println("LoginController doProcess");
 		
 		String param = req.getParameter("param");
 		

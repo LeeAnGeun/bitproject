@@ -24,5 +24,6 @@ public class ClubController extends HttpServlet{
 		System.out.println("BbsController doProcess");
 		
 		String param = req.getParameter("param");
+		
 	}
 }

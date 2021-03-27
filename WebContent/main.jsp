@@ -1,3 +1,4 @@
+<%@page import="login.LoginDto"%>
 <%@page import="book.BookDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,6 +17,13 @@ List<BookDto> list = (List)request.getAttribute("list");
 for(int i=0; i<list.size(); i++){
 	BookDto dto = list.get(i);
 	System.out.println( i+1 + " : " + dto.toString());
+}
+
+List<LoginDto> Mlist = (List)request.getAttribute("Mlist");
+
+for(int i=0; i<Mlist.size(); i++){
+	LoginDto Ldto = Mlist.get(i);
+	System.out.println( i+1 + " : " + Ldto.toString());
 }
 %>
 
